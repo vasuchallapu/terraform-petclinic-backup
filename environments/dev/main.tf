@@ -1,8 +1,8 @@
-# # Lookup the Route 53 hosted zone for agklya.com
-# data "aws_route53_zone" "selected" {
-#   name         = "agklya.com"
-#   private_zone = false
-# }
+# Lookup the Route 53 hosted zone for vasuchallapu.click
+data "aws_route53_zone" "selected" {
+  name         = "vasuchallapu.click"
+  private_zone = false
+}
 
 module "vpc" {
   source               = "../../modules/vpc"
@@ -34,7 +34,7 @@ module "autoscaling_group" {
   security_group_id    = module.autoscaling_group.security_group_id # Output from ASG module
   target_group_arn     = module.load_balancer.target_group_arn
   iam_instance_profile = module.autoscaling_group.iam_instance_profile # Output from ASG module
-  ecr_registry         = "310655363801.dkr.ecr.us-east-1.amazonaws.com"
+  ecr_registry         = "588738567172.dkr.ecr.us-east-1.amazonaws.com"
   ecr_repository       = "spring-petclinic-app"
   region               = "us-east-1"
   vpc_id               = module.vpc.vpc_id
@@ -55,24 +55,25 @@ module "rds" {
 }
 
 # Cloudflare DNS for petclinic subdomain
-module "cloudflare" {
-  source             = "../../modules/cloudflare"
-  cloudflare_api_token = var.cloudflare_api_token
-  domain_name        = "agklya.com"
-  subdomain_name     = "petclinic-dev"
-  load_balancer_dns_name = module.load_balancer.load_balancer_dns_name
+# module "cloudflare" {
+#   source             = "../../modules/cloudflare"
+#   cloudflare_api_token = var.cloudflare_api_token
+#   domain_name        = "agklya.com"
+#   subdomain_name     = "petclinic-dev"
+#   load_balancer_dns_name = module.load_balancer.load_balancer_dns_name
+# }
+
+# AWS Route53 DNS for petclinic subdomain
+module "route53" {
+  source       = "../../modules/route53"
+  zone_id      = data.aws_route53_zone.selected.zone_id
+  subdomain    = "petclinic-dev.vasuchallapu.click"
+  alb_dns_name = module.load_balancer.alb_dns_name
+  alb_zone_id  = module.load_balancer.alb_zone_id
 }
 
-# module "route53" {
-#   source       = "../../modules/route53"
-#   zone_id      = data.aws_route53_zone.selected.zone_id
-#   subdomain    = "petclinic-dev.agklya.com"
-#   alb_dns_name = module.load_balancer.alb_dns_name
-#   alb_zone_id  = module.load_balancer.alb_zone_id
-# }
-
-# module "acm" {
-#   source      = "../../modules/acm"
-#   domain_name = "petclinic-dev.agklya.com"
-#   zone_id     = data.aws_route53_zone.selected.zone_id
-# }
+module "acm" {
+  source      = "../../modules/acm"
+  domain_name = "petclinic-dev.vasuchallapu.click"
+  zone_id     = data.aws_route53_zone.selected.zone_id
+}
