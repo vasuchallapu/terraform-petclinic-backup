@@ -44,6 +44,18 @@ resource "aws_lb_listener" "http" {
   }
 }
 
+# Listener for HTTPS Traffic
+resource "aws_lb_listener" "https" {
+  load_balancer_arn = aws_lb.public_lb.arn
+  port              = 443
+  protocol          = "HTTPS"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.main.arn
+  }
+}
+
 # Security Group for Load Balancer
 resource "aws_security_group" "lb_sg" {
   name        = "${var.name}-lb-sg"
