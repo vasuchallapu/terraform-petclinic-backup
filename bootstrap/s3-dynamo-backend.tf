@@ -1,6 +1,6 @@
 # Create the S3 bucket
 resource "aws_s3_bucket" "tf_state" {
-  bucket = "pet-clinic-tf-state"
+  bucket = "pet-clinic-tf-state-v"
 
   versioning {
     enabled = true
@@ -15,7 +15,7 @@ resource "aws_s3_bucket" "tf_state" {
   }
 
   tags = {
-    Name = "pet-clinic-tf-state"
+    Name = "pet-clinic-tf-state-v"
   }
 }
 

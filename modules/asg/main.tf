@@ -21,16 +21,16 @@ export DB_NAME="petclinicdb"
 export DB_USERNAME="petadmin"
 export DB_PASSWORD="${var.db_password}"
 
-# Update the system and install Docker and other dependencies
-sudo apt update && sudo apt install -y --no-install-recommends curl unzip
+# # Update the system and install Docker and other dependencies
+# sudo apt update && sudo apt install -y --no-install-recommends curl unzip
 
-# Install AWS CLI v2
-sudo curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-sudo unzip awscliv2.zip
-sudo ./aws/install
+# # Install AWS CLI v2
+# sudo curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+# sudo unzip awscliv2.zip
+# sudo ./aws/install
 
-# Ensure Docker service is running
-sudo systemctl start docker
+# # Ensure Docker service is running
+# sudo systemctl start docker
 
 # Log in to Amazon ECR
 sudo aws ecr get-login-password --region ${var.region} | docker login --username AWS --password-stdin ${var.ecr_registry}
