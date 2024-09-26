@@ -44,10 +44,10 @@ resource "aws_lb_listener" "http" {
   }
 }
 
-# Fetch the ACM certificate ARN dynamically based on domain name
-data "aws_acm_certificate" "petclinic-cert" {
-  domain = "vasuchallapu.click"
-}
+# # Fetch the ACM certificate ARN dynamically based on domain name
+# data "aws_acm_certificate" "petclinic-cert" {
+#   domain = "vasuchallapu.click"
+# }
 
 # Listener for HTTPS Traffic
 resource "aws_lb_listener" "https" {
@@ -55,7 +55,7 @@ resource "aws_lb_listener" "https" {
   port              = 443
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = data.aws_acm_certificate.petclinic-cert.arn
+  certificate_arn   = "arn:aws:acm:us-east-1:588738567172:certificate/8c4b959c-82f0-476b-9fdf-f26c6b434ee7"
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.main.arn
