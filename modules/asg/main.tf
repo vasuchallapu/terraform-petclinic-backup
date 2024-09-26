@@ -40,6 +40,7 @@ sudo docker pull ${var.ecr_registry}/${var.ecr_repository}:latest
 sudo docker run -d -p 8080:8080 \
   -e SPRING_PROFILES_ACTIVE=postgres \
   -e DB_HOST=$DB_HOST \
+  -e DB_PORT=$DB_PORT \
   -e DB_NAME=$DB_NAME \
   -e DB_USERNAME=$DB_USERNAME \
   -e DB_PASSWORD=$DB_PASSWORD \
