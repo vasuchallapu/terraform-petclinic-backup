@@ -45,7 +45,7 @@ resource "aws_lb_listener" "http" {
 }
 
 # Fetch the ACM certificate ARN dynamically based on domain name
-data "aws_acm_certificate" "petclinic-dev.vasuchallapu.click-cert" {
+data "aws_acm_certificate" "petclinic-cert" {
   domain = "vasuchallapu.click"
 }
 
@@ -55,7 +55,7 @@ resource "aws_lb_listener" "https" {
   port              = 443
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = data.aws_acm_certificate.petclinic-dev.vasuchallapu.click-cert.arn
+  certificate_arn   = data.aws_acm_certificate.petclinic-cert.arn
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.main.arn
