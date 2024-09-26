@@ -27,7 +27,7 @@ module "load_balancer" {
 module "autoscaling_group" {
   source               = "../../modules/asg"
   name                 = "dev-pet-clinic-asg"
-  ami_id               = "ami-0ebb27e133bd192ff" # Replace with your AMI ID
+  ami_id               = "ami-0e0c5b3d8bcf7a48f" # Replace with your AMI ID
   instance_type        = "t2.micro"
   key_name             = "kube-demo"
   private_subnets      = module.vpc.private_subnets
