@@ -21,7 +21,7 @@ module "load_balancer" {
   public_subnets    = module.vpc.public_subnets
   security_group_id = module.load_balancer.security_group_id # Now output from the ALB module
   target_group_name = "dev-pet-clinic-target-group"
-  # certificate_arn   = module.acm.certificate_arn
+  certificate_arn   = module.acm.certificate_arn
 }
 
 module "autoscaling_group" {
@@ -49,7 +49,7 @@ module "rds" {
   private_subnets       = module.vpc.private_subnets
   vpc_id                = module.vpc.vpc_id
   ec2_security_group_id = module.autoscaling_group.security_group_id # Now output from the ASG module
-  database_name         = "petclinicdb"
+  database_name         = "petclinic-vasu"
   master_username       = "petadmin"
   master_password       = var.db_password
 }
