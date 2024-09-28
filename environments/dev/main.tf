@@ -49,7 +49,7 @@ module "rds" {
   private_subnets       = module.vpc.private_subnets
   vpc_id                = module.vpc.vpc_id
   ec2_security_group_id = module.autoscaling_group.security_group_id # Now output from the ASG module
-  database_name         = "petclinic-vasu"
+  database_name         = "petclinicvasu"
   master_username       = "petadmin"
   master_password       = var.db_password
 }

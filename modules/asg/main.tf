@@ -17,7 +17,7 @@ set -e
 # Export environment variables for RDS connection
 export DB_HOST="${var.db_host}"
 export DB_PORT="5432"
-export DB_NAME="petclinic-vasu"
+export DB_NAME="petclinicvasu"
 export DB_USERNAME="petadmin"
 export DB_PASSWORD="${var.db_password}"
 
