@@ -51,6 +51,7 @@ resource "aws_lb_listener" "http" {
 
 # Listener for HTTPS Traffic
 resource "aws_lb_listener" "https" {
+  source            = "../../modules/alb"
   load_balancer_arn = aws_lb.public_lb.arn
   port              = 443
   protocol          = "HTTPS"
