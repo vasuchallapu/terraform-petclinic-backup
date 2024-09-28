@@ -32,7 +32,7 @@ resource "aws_security_group" "rds_sg" {
 
 # RDS Cluster (Aurora with PostgreSQL)
 resource "aws_rds_cluster" "aurora_cluster" {
-  cluster_identifier      = "petclinic-vasu-cluster"
+  cluster_identifier      = "petclinic-db-cluster"
   engine                  = "aurora-postgresql"
   engine_version          = "13.7"
   database_name           = var.database_name
@@ -49,7 +49,7 @@ resource "aws_rds_cluster" "aurora_cluster" {
 
 # RDS Cluster Instance (Primary in 1 AZ)
 resource "aws_rds_cluster_instance" "aurora_instance" {
-  identifier              = "petclinic-vasu-instance-1"
+  identifier              = "petclinic-db-instance-1"
   cluster_identifier      = aws_rds_cluster.aurora_cluster.id
   instance_class          = "db.t3.medium"
   engine                  = aws_rds_cluster.aurora_cluster.engine
