@@ -18,7 +18,7 @@ set -e
 export DB_HOST="${var.db_host}"
 export DB_PORT="5432"
 export DB_NAME="petclinicvasu"
-export DB_USERNAME="petadmin"
+export DB_USERNAME="petclinic"
 export DB_PASSWORD="${var.db_password}"
 
 # # Update the system and install Docker and other dependencies
